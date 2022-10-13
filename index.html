@@ -7,9 +7,17 @@
         }}();
         
         function identifyUser() {
-            analytics.identify('f4ca124298', {
-                name: 'Michael Brown',
-                email: document.getElementById("email").value
+            var userId = "";
+
+            if (document.getElementById("userid").value==4) {
+                userId = crypto.randomUUID();
+            } else {
+                userId = document.getElementById("userid").value;
+            }
+
+            analytics.identify(userId, {
+                email: document.getElementById("email").value,
+                plan: document.getElementById("plan").value
             });
         }
     </script>
@@ -29,6 +37,35 @@
                 </td>
                 <td>
                     <button type="button" onclick="identifyUser()">Identify</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="fname" >plan:</label>
+                </td>
+                <td>
+                    <select name="plan" id="plan">
+                        <option value="annual">Annual</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="weekly">Weekly</option>
+                      </select>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="fname" >userid:</label>
+                </td>
+                <td>
+                    <select name="userid" id="userid">
+                        <option value="e96c0c6d-1e7a-4dfc-a5f0-999477db1e94">#1 - e96c0c6d</option>
+                        <option value="19e8f24b-9277-4dd8-aa16-9d57f010d3e7">#2 - 19e8f24b</option>
+                        <option value="9003869f-bf53-4030-a123-f2619e081f73">#3 - 9003869f</option>
+                        <option value="4">generate new one</option>
+                      </select>
+                </td>
+                <td>
                 </td>
             </tr>
         </table>
